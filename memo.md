@@ -27,6 +27,18 @@ Amazon Elastic Compute Cloud用語
 サブネット間を跨ぐ通信を制御  
 セキュリティグループはEC2などに用いるファイアウォールで外部アクセスに対応  
 
+### EC2インスタンス
+
+### [リザーブドインスタンス](https://aws.amazon.com/jp/ec2/pricing/reserved-instances/)
+
+利用期間分をあらかじめ購入することで割引価格が適応
+
+|種類|内容|
+|:---|:---|
+|Standardタイプ|リージョンやAZを指定してインスタンスを購入、同じインスタンス構成なら同じリージョンやAZ内でインスタンスの配置変更が可能|
+|Convertibleタイプ|自由に構成変更が可能だが、Standardタイプより割高|
+|スケジュール|1年間に渡り毎日・毎週・毎月キャパシー予約を受けつける|
+
 ### EC2インスタンスストア
 
 インスタンス用のブロックレベルの一時ストレージを提供
@@ -34,7 +46,8 @@ Amazon Elastic Compute Cloud用語
 ## [S3](https://aws.amazon.com/jp/s3/)
 
 データは自動的に複数のAZへコピーされる（リージョンではない）  
-有効期限付きの署名付きURLを発行することができる  
+有効期限付きの署名付きURLを発行できます
+署名付きURLには、直接アップロードも可能（本機能を用いることでWebサーバーへの通信量を下げることができる）  
 特定のユーザーのみ限定公開もできる  
 
 ### [S3 Glacier](https://aws.amazon.com/jp/glacier/)
@@ -69,6 +82,11 @@ EC2で稼動しているLinuxのログも取得できる
 
 AWS APIのログを記録する  
 EC2で動かしているサーバー内部ログは取得出来ない  
+
+## [Amazon Route 53](https://aws.amazon.com/jp/route53/)
+
+DNS  
+CNAMEレコード（ドメイン名やホスト名の定義）はホストされている場所に関係なく任意のDNSレコードを登録できる  
 
 ## [Amazon VPC](https://aws.amazon.com/jp/vpc/)
 
@@ -124,6 +142,7 @@ EC2インスタンス間で非同期なジョブ制御に用いる
 ## [AWS Elastic Beanstalk](https://aws.amazon.com/jp/elasticbeanstalk/)
 
 コードをアップロードしたらAWSが環境構築（プロビジョニング）・運用開始（デプロイ）まで面倒を見てくれる  
+Nginx上に構築されたWebアプリケーションもデプロイできる
 
 ## [AWS OpsWorks](https://aws.amazon.com/jp/opsworks/)
 
@@ -137,3 +156,7 @@ RDB
 ## [AWS Auto Scaling](https://aws.amazon.com/jp/autoscaling/)
 
 EC2インスタンス増加時は、EC2インスタンスが一番少ないAZを指定して起動する  
+
+## NATゲートウェイ
+
+インターネットからアクセスできるのはWebサーバーだけだが、奥のDBサーバーも更新のために内部からの接続は許可したい場合に設置
