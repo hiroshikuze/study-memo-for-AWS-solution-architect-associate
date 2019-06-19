@@ -5,6 +5,7 @@
 ## [Amazon CloudFront](https://aws.amazon.com/jp/cloudfront/)
 
 CDN  
+地域制限の機能もある  
 
 ## [AWS CLI](https://aws.amazon.com/jp/cli/)
 
@@ -16,18 +17,12 @@ IAMポリシーは認証に不要
 
 ハイパーバイザー仮想化を利用したコンピューティングサービス
 
-### [Elastic IP](https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
+### EC2インスタンスメタデータで確認できる情報
 
-Amazon Elastic Compute Cloud用語  
-アタッチしているEC2インスタンスが起動しているなら無料  
-
-### ネットワークACLとセキュリティグループ
-
-ネットワークACLはVPC内のファイアウォール  
-サブネット間を跨ぐ通信を制御  
-セキュリティグループはEC2などに用いるファイアウォールで外部アクセスに対応  
-
-### EC2インスタンス
+* プライベートIPアドレス
+* パブリックIPアドレス
+* インスタンスのローカルホスト名
+* 公開鍵（パブリックキー）
 
 ### [リザーブドインスタンス](https://aws.amazon.com/jp/ec2/pricing/reserved-instances/)
 
@@ -43,6 +38,18 @@ Amazon Elastic Compute Cloud用語
 
 インスタンス用のブロックレベルの一時ストレージを提供
 
+### [Elastic IP](https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
+
+Amazon Elastic Compute Cloud用語  
+アタッチしているEC2インスタンスが起動しているなら無料  
+
+### ネットワークACLとセキュリティグループ
+
+|種類|内容|
+|:---|:---|
+|ネットワークACL|VPC内のファイアウォール、サブネット間を跨ぐ通信を制御<br>特定のIPアドレスからの通信を拒否する設定はできない<br>許可しなければデフォルトで拒否|
+|セキュリティグループ|EC2などに用いる、ファイアウォールで外部アクセスに対応|
+
 ## [S3](https://aws.amazon.com/jp/s3/)
 
 データは自動的に複数のAZへコピーされる（リージョンではない）  
@@ -50,10 +57,34 @@ Amazon Elastic Compute Cloud用語
 署名付きURLには、直接アップロードも可能（本機能を用いることでWebサーバーへの通信量を下げることができる）  
 特定のユーザーのみ限定公開もできる  
 
-### [S3 Glacier](https://aws.amazon.com/jp/glacier/)
+### S3データ整合性
 
-もっとも安価、ロードに何時間もかかる  
-めったにアクセスしないデーターの管理に用いる  
+|種類|データ整合性|
+|:---|:---|
+|PUT（新規追加）|書き込み後の読み込み整合性、S3から完了（HTTP200）が返されるとデータ参照可能|
+|PUT（更新）|結果整合性|
+|DELETE（削除）|結果整合性|
+
+### S3ストレージクラス
+
+|種類|ストレージクラス|
+|:---|:---|
+|スタンダード|頻繁なデータアクセスに向く|
+|標準低頻度アクセス|低頻度アクセスに向く、すぐにデータが取り出せる|
+|1ゾーン低頻度アクセス|低頻度アクセスで耐久性が低くても良くてコスト重視の場合に向く、すぐにデータが取り出せる|
+|[S3 Glacier](https://aws.amazon.com/jp/glacier/)|※別項目参照|
+
+#### [S3 Glacier](https://aws.amazon.com/jp/glacier/)
+
+S3ストレージクラスの1つ  
+もっとも安価、ロードに何時間もかかるものもある  
+めったにアクセスしないデーター＝アーカイブの管理に用いる  
+
+|種類|ロードに必要な時間|
+|:---|:---|
+|迅速（Expedited）|1～5分|
+|標準（Standard）|3～5時間|
+|大容量（Bulk）|5～12時間|
 
 ## [Amazon SNS](https://aws.amazon.com/jp/sns/)
 
@@ -92,9 +123,11 @@ CNAMEレコード（ドメイン名やホスト名の定義）はホストされ
 
 AWS内の独立した仮想ネットワークを構築する  
 
-### [VPCフローログ](https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/flow-logs.html)
-
- VPC内のネットワークインターフェィス間の通信トラフィックも監視可能
+|種類|内容|
+|:---|:---|
+|[VPCフローログ](https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/flow-logs.html)|VPC内のネットワークインターフェィス間の通信トラフィックも監視可能|
+|[VPCエンドポイント](https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/vpc-endpoints.html)|VPCリソースとAWSサービス間を接続する|
+|[VPCピアリング](https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/vpc-peering.html)|別のAWSアカウントとインターネットを経由せずVPC間を接続|
 
 ## [Amazon EBS](https://aws.amazon.com/jp/ebs/)
 
@@ -102,6 +135,11 @@ Amazon Elastic Block Store
 EC2に接続できるブロックレベルストレージ  
 単一のEC2インスタンスにしかアタッチできない  
 スナップショットを別のリージョンへコピー可能  
+
+|種類|内容|
+|:---|:---|
+|Instance Store-Backedインスタンス|停止や再開はできない|
+|EBS-Backedインスタンス|停止や再開が可能|
 
 ### マグネティック
 
@@ -157,6 +195,45 @@ RDB
 
 EC2インスタンス増加時は、EC2インスタンスが一番少ないAZを指定して起動する  
 
+### ユーザーデータ
+
+EC2起動時に一度だけスクリプトを実行できる  
+Auto Scalingグループで作成された新しいAmazon Linuxインスタンスにカスタムスクリプトを渡すこともできる  
+
 ## NATゲートウェイ
 
 インターネットからアクセスできるのはWebサーバーだけだが、奥のDBサーバーも更新のために内部からの接続は許可したい場合に設置
+
+## [Amazon EMR](https://aws.amazon.com/jp/emr/)
+
+Apache SparkやHadhopを用いて膨大なデータを迅速かつ高効率で分析するサービス
+
+## リバースプロキシ
+
+一般的な用語、[外部からWebサーバーへアクセスされる際、Webサーバーの代替を行って負荷を下げるサービス](https://www.atmarkit.co.jp/ait/articles/1608/25/news034.html)
+
+## [IAM](https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/introduction.html)
+
+グローバルサービスなのでリージョンごとに作成する必要はない  
+別リージョンで同じ権限を割り当てる場合は、コピーせずそのまま割り当てれば良い
+
+## [Elastic Load Balancing](https://aws.amazon.com/jp/elasticloadbalancing/)
+
+ELB  
+Application Load Balancerでは、リクエストのクエリーからあらかじめ設定されたルーティングに沿って振り分けをする  
+
+## 脆弱性／侵入テスト
+
+ユーザー自身がAWSに事前申請し許可を得た上で行う  
+テストはすべてのインスタンスで許可されるわけではない  
+
+## [API Gateway](https://aws.amazon.com/jp/api-gateway/)
+
+APIを簡単に作れる  
+APIキャッシュを有効にすることでレスポンスがキャッシュされ、APIキャッシュは時間単位で課金される  
+有効期限TTLが0の場合、キャッシュはされない  
+
+## [Amazon ElastiCache](https://aws.amazon.com/jp/elasticache/)
+
+メモリ上でキャッシュするので高速  
+RDSと組み合わせる  
