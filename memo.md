@@ -56,6 +56,7 @@ Amazon Elastic Compute Cloud用語
 有効期限付きの署名付きURLを発行できます
 署名付きURLには、直接アップロードも可能（本機能を用いることでWebサーバーへの通信量を下げることができる）  
 特定のユーザーのみ限定公開もできる  
+標準的なファイルアクセスはサポートしていない  
 
 ### S3データ整合性
 
@@ -107,7 +108,8 @@ NはNotification
 ## [CloudWatch](https://aws.amazon.com/jp/cloudwatch/)
 
 EC2で稼動しているLinuxのログも取得できる  
-メモリ使用率はカスタムメトリクスの使用が必要  
+CPU使用率・インスタンスストアボリュームから読み取られたバイト数・ネットワークインターフェイスから受信されたバイト数などは標準メトリックスで収集可能
+メモリ使用率・ディスク使用率はカスタムメトリクスの使用が必要  
 
 ## [AWS CloudTrail](https://aws.amazon.com/jp/cloudtrail/)
 
@@ -126,8 +128,8 @@ AWS内の独立した仮想ネットワークを構築する
 |種類|内容|
 |:---|:---|
 |[VPCフローログ](https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/flow-logs.html)|VPC内のネットワークインターフェィス間の通信トラフィックも監視可能|
-|[VPCエンドポイント](https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/vpc-endpoints.html)|VPCリソースとAWSサービス間を接続する|
-|[VPCピアリング](https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/vpc-peering.html)|別のAWSアカウントとインターネットを経由せずVPC間を接続|
+|[VPCエンドポイント](https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/vpc-endpoints.html)|VPCリソースとAWSサービス間を接続する、EC2からS3やDynamoDBに接続できる|
+|[VPCピアリング](https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/vpc-peering.html)|「別のAWSアカウントと」インターネットを経由せずVPC間を接続|
 
 ## [Amazon EBS](https://aws.amazon.com/jp/ebs/)
 
@@ -135,11 +137,17 @@ Amazon Elastic Block Store
 EC2に接続できるブロックレベルストレージ  
 単一のEC2インスタンスにしかアタッチできない  
 スナップショットを別のリージョンへコピー可能  
+ストレージの自動拡大・縮小はサポートしていない  
 
 |種類|内容|
 |:---|:---|
 |Instance Store-Backedインスタンス|停止や再開はできない|
 |EBS-Backedインスタンス|停止や再開が可能|
+
+|種類|内容|
+|:---|:---|
+|プロビジョンドIOPS SSD|パフォーマンスを最大限に引き出す|
+|スループット最適化HDD|HDDの中ではスループットが高い、低コスト、ビッグデータ向け|
 
 ### マグネティック
 
@@ -171,6 +179,9 @@ EC2インスタンス間で非同期なジョブ制御に用いる
 
 ## [AWS CloudFormation](https://aws.amazon.com/jp/cloudformation/)
 
+共通言語を用いてリソースを公開可能にする準備をする  
+Properties Resourceが必須項目  
+
 |項目|内容|
 |:---|:---|
 |CidrBlock|許可・拒否するネットワークアドレスを表記|
@@ -195,14 +206,19 @@ RDB
 
 EC2インスタンス増加時は、EC2インスタンスが一番少ないAZを指定して起動する  
 
-### ユーザーデータ
+### ユーザーデータ（EC2）
 
 EC2起動時に一度だけスクリプトを実行できる  
 Auto Scalingグループで作成された新しいAmazon Linuxインスタンスにカスタムスクリプトを渡すこともできる  
 
-## NATゲートウェイ
+### インスタンスメタデータ（EC2）
 
-インターネットからアクセスできるのはWebサーバーだけだが、奥のDBサーバーも更新のために内部からの接続は許可したい場合に設置
+実行中のEC2インスタンスを設定するのに用いる  
+
+## NATゲートウェイ・[インターネットゲートウェイ](https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/VPC_Internet_Gateway.html)
+
+インターネットからアクセスできるのはWebサーバーだけだが、奥のDBサーバーも更新のために内部からの接続は許可したい場合に設置  
+アクセス制御を行うためのものではない  
 
 ## [Amazon EMR](https://aws.amazon.com/jp/emr/)
 
@@ -237,3 +253,30 @@ APIキャッシュを有効にすることでレスポンスがキャッシュ�
 
 メモリ上でキャッシュするので高速  
 RDSと組み合わせる  
+
+## [AWS Data Pipeline](https://docs.aws.amazon.com/ja_jp/datapipeline/latest/DeveloperGuide/what-is-datapipeline.html)
+
+データベースからのデータを取り出し・加工・保存するサービス
+
+## [AWS Storage Gateway](https://aws.amazon.com/jp/storagegateway/)
+
+ローカルキャッシング対応のハイブリッドクラウドストレージ  
+オンプレミスのアプライアンス（例:社内業務サーバー）と接続し、バックアップを行う  
+
+## [Amazon Redshift](https://aws.amazon.com/jp/redshift/)
+
+Amazon S3上の巨大データの分析に用いる  
+スナップショットでバックアップする  
+自動取得したスナップショットは8時間もしくは5GBのデータ更新があるたびに自動で取得する  
+ノード数を増やすと複数のデータベースがクラスター化され、対象外性が高まる  
+リードレプリカ・マルチAZは設定できない  
+
+## プレイスメントグループ
+
+単一AZ内のEC2インスタンスを論理的にグルーピングしたもの  
+
+## [Amazon EFS](https://aws.amazon.com/jp/efs/)
+
+Elastic File System  
+標準的なファイルシステムをサポート  
+ストレージの自動拡大・縮小もサポート  
