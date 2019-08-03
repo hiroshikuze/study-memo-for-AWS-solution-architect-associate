@@ -54,6 +54,18 @@ Amazon Elastic Compute Cloud用語
 
 ec2-user
 
+### EC2のEIPアドレス
+
+利用していない期間も課金される
+
+### EC2に割り当てるアドレス
+
+|項目|コメント|
+|:---|:---|
+|パブリックアドレス|毎回ランダムで割り当てられる|
+|プライベートアドレス|再起動してもアドレスは固定<br>EC2インスタンスを削除しない限り保持される|
+|ENI Erastic Network Interface|セカンダリなプライベートIPアドレスとして利用できる<br>他のEC2インスタンスに割り当て可能|
+
 ## [S3](https://aws.amazon.com/jp/s3/)
 
 データは自動的に複数のAZへコピーされる（リージョンではない）  
@@ -241,6 +253,22 @@ Apache SparkやHadhopを用いて膨大なデータを迅速かつ高効率で�
 グローバルサービスなのでリージョンごとに作成する必要はない  
 別リージョンで同じ権限を割り当てる場合は、コピーせずそのまま割り当てれば良い
 
+### IAMのアクセスアドバイザー
+
+ポリシーを使用したユーザの確認、サービスに関連するポリシーの確認ができる
+
+### IAMのアクセスアドバイザーにおけるService Last Accessed Data
+
+IAMエンティティが、最後にAWSサービスへアクセスした日付と時刻
+
+### IAMのCredential Report
+
+利用日付などが記録されたIAM認証情報にかかわるレポートファイル
+
+### [Temporary Security Credentials](https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_credentials_temp.html)
+
+AWSに対して一時的な認証情報を作成する仕組み
+
 ## [Elastic Load Balancing](https://aws.amazon.com/jp/elasticloadbalancing/)
 
 ELB  
@@ -293,3 +321,34 @@ Elastic File System
 
 スキーマ（表と属性）のないデータベース  
 複数のスキーマをそのままの状態で保存しつつ、保存後にスキーマを修正できる  
+
+## [AWS Artifact](https://aws.amazon.com/jp/artifact/)
+
+AWS上のコンプライアンスレポートへのオンデマンドアクセス
+
+## [AWS CodeCommit](https://aws.amazon.com/jp/codecommit/)
+
+プライベートGitレポジトリでのコード保存
+
+## [AWS CodeBuild](https://aws.amazon.com/jp/codebuild/)
+
+コードのビルドとテスト
+
+## [AWS CodeDeply](https://aws.amazon.com/jp/codedeploy/)
+
+コードデプロイの自動化  
+CodeComit（コード保存）→CodeBuild（ビルトとテスト）→CodeDeply（アプリケーションとして展開）とセットで使われることが多い  
+
+## [AWS CodePipeline](https://aws.amazon.com/jp/codepipeline/)
+
+継続的デリバリーを使用したソフトウェアのリリース  
+DataPipelineとは異なる  
+ビルド、テスト、デプロイなど、リリース作業に必要な一連のプロセスをまとめたもの  
+
+## [AWS Config](https://aws.amazon.com/jp/config/)
+
+IAMを用いたAWSリソースの設定（IAMのUser・Group・Role・Policyの変更履歴・構成変更）を評価、監査、審査を行う
+
+## [AWS Security Token Service(STS)](https://aws.amazon.com/jp/blogs/news/category/security-identity-compliance/aws-security-token-service/)
+
+動的にIAMユーザーを作り、一時的に利用するトークンを発行するサービス
