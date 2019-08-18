@@ -66,6 +66,10 @@ ec2-user
 |プライベートアドレス|再起動してもアドレスは固定<br>EC2インスタンスを削除しない限り保持される|
 |ENI Erastic Network Interface|セカンダリなプライベートIPアドレスとして利用できる<br>他のEC2インスタンスに割り当て可能|
 
+### EC2インスタンスへのIAMロールの追加や修正方法
+
+EC2マネジメントコンソールからEC2インスタンスのアクション操作でアタッチする
+
 ## [S3](https://aws.amazon.com/jp/s3/)
 
 データは自動的に複数のAZへコピーされる（リージョンではない）  
@@ -136,6 +140,7 @@ EC2で動かしているサーバー内部ログは取得出来ない
 
 DNS  
 CNAMEレコード（ドメイン名やホスト名の定義）はホストされている場所に関係なく任意のDNSレコードを登録できる  
+SLAを100%で定義している  
 
 ### マルチバリュールーティング
 
@@ -235,6 +240,10 @@ Auto Scalingグループで作成された新しいAmazon Linuxインスタン�
 
 実行中のEC2インスタンスを設定するのに用いる  
 
+### Auto Scalingグループ
+
+起動されたインスタンスは複数のアベイラビリティーゾーン間で均等にバランシングされる  
+
 ## NATゲートウェイ・[インターネットゲートウェイ](https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/VPC_Internet_Gateway.html)
 
 インターネットからアクセスできるのはWebサーバーだけだが、奥のDBサーバーも更新のために内部からの接続は許可したい場合に設置  
@@ -251,13 +260,20 @@ Apache SparkやHadhopを用いて膨大なデータを迅速かつ高効率で�
 ## [IAM](https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/introduction.html)
 
 グローバルサービスなのでリージョンごとに作成する必要はない  
-別リージョンで同じ権限を割り当てる場合は、コピーせずそのまま割り当てれば良い
+別リージョンで同じ権限を割り当てる場合は、コピーせずそのまま割り当てれば良い  
+
+制限については以下の通り  
+|種類|内容|
+|:---|:---|
+|アカウント|1アカウント＝5000ユーザーまで|
+|所属グループ|10グループまで|
+|作成グループ|100グループまで|
 
 ### IAMのアクセスアドバイザー
 
 ポリシーを使用したユーザの確認、サービスに関連するポリシーの確認ができる
 
-### IAMのアクセスアドバイザーにおけるService Last Accessed Data
+### IAMのアクセスアドバイザー（Access Advisor）におけるService Last Accessed Data
 
 IAMエンティティが、最後にAWSサービスへアクセスした日付と時刻
 
@@ -269,10 +285,26 @@ IAMエンティティが、最後にAWSサービスへアクセスした日付�
 
 AWSに対して一時的な認証情報を作成する仕組み
 
+### [インラインポリシー](https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#inline-policies)
+
+1つのプリンシパルエンティティ (ユーザー、グループ、またはロール) に埋め込まれたポリシーであり、つまり、プリンシパルエンティティに固有です。  
+プリンシパルエンティティの作成時、またはそれ以降で、ポリシーを作成してプリンシパルエンティティに埋め込むことができます。  
+
 ## [Elastic Load Balancing](https://aws.amazon.com/jp/elasticloadbalancing/)
 
 ELB  
 Application Load Balancerでは、リクエストのクエリーからあらかじめ設定されたルーティングに沿って振り分けをする  
+ELB自体が負荷に応じて自動にスケールします  
+
+### ELBの種類
+
+||Application Load Balancer|Network Load Balancer|Classic Load Balancer|
+|:--|:--|:--|:--|
+|コメント|レイヤー7でHTTP/HTTPSを提供、負荷分散など実装|レイヤー4のTCP・レイヤー5のTLSをサポート、固定IPアドレス、応答トラフィックはロードバランサーを経由せずクライアントに直接送るので高パフォーマンス|HTTP/HTTPSを提供しているが旧来のサービス|
+
+### Pre-Warming（暖機運転）
+
+トラフィックの急増が予想される場合事前にELBをスケールしたい場合は、AWSサポートに申請する（AWSコンソールからでは対応できない）  
 
 ## 脆弱性／侵入テスト
 
@@ -351,4 +383,26 @@ IAMを用いたAWSリソースの設定（IAMのUser・Group・Role・Policyの�
 
 ## [AWS Security Token Service(STS)](https://aws.amazon.com/jp/blogs/news/category/security-identity-compliance/aws-security-token-service/)
 
-動的にIAMユーザーを作り、一時的に利用するトークンを発行するサービス
+動的にIAMユーザーを作り、一時的に利用するトークンを発行するサービス  
+
+## [AWS Organizations](https://aws.amazon.com/jp/organizations/)
+
+AWSアカウントの一元管理、大きな組織におけるIAMの管理を簡易化する  
+
+* 複数アカウントの一元管理  
+
+組織単位をOUという  
+
+* 新規アカウント作成の自動化  
+
+* 一括請求  
+
+管理ができるのはAWS Organizationのマスターアカウントのみ  
+IAMのルートアカウントでは管理できない  
+
+### AWS Organizations：機能セットの選択
+
+|名前|機能|
+|:--|:--|
+|Consolidated Biling Only|支払い一括代行のみを実施する場合に選択|
+|All Feature|Consolidated Biling Onlyに加えて企業内の複数アカウントも統制したい場合に選択|
