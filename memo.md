@@ -287,7 +287,7 @@ AWSに対して一時的な認証情報を作成する仕組み
 
 ### [インラインポリシー](https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#inline-policies)
 
-1つのプリンシパルエンティティ (ユーザー、グループ、またはロール) に埋め込まれたポリシーであり、つまり、プリンシパルエンティティに固有です。  
+1つのプリンシパルエンティティ（ユーザー、グループ、またはロール）に埋め込まれたポリシーであり、つまり、プリンシパルエンティティに固有です。  
 プリンシパルエンティティの作成時、またはそれ以降で、ポリシーを作成してプリンシパルエンティティに埋め込むことができます。  
 
 ## [Elastic Load Balancing](https://aws.amazon.com/jp/elasticloadbalancing/)
