@@ -447,3 +447,8 @@ IAMのルートアカウントでは管理できない
 ### VGW (Virtual Private Gateway)
 
 AWS側でVPCに対して取り付け可能な仮想ルーター  
+
+## SWF (Amazon Simple Workflow Service)
+
+ひとかたまりの処理に関する状態管理とタスク間の流れ（＝ワークフロー）の管理を行う  
+Ruby/Java/.NET/PHPなどに対応している、Pythonは非対応  
