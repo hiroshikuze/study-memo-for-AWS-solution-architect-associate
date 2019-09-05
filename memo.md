@@ -118,8 +118,9 @@ NはNotification
 |種類|内容|
 |:---|:---|
 |Data Analytics|リアルタイム分析|
-|Data Streams|提携処理|
-|Data Firehose|配信|
+|Data Streams|Lamdaなどへ提携処理|
+|Data Firehose|S3・Redshiftなどへ配信|
+|Video Streams|カメラ・ビデオを取り込んで解析可能にする|
 
 ## [CloudFormation](https://aws.amazon.com/jp/cloudformation/)
 
