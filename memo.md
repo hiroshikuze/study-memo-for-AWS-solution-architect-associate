@@ -109,6 +109,12 @@ S3ストレージクラスの1つ
 |標準（Standard）|3～5時間|
 |大容量（Bulk）|5～12時間|
 
+#### S3暗号化
+
+* S3パケットポリシーでデフォルト暗号化を指定し、S3で管理されるキーによるサーバーサイド暗号化を使用  
+* キーを使用してすべてのデータを暗号化してからS3に保存  
+* S3バケットポリシーでデフォルト暗号化を指定し、[AWS KMS](https://aws.amazon.com/jp/kms/)の管理対象キーでS3サーバーサイド暗号化を使用
+
 ## [Amazon SNS](https://aws.amazon.com/jp/sns/)
 
 NはNotification  
@@ -405,6 +411,7 @@ IAMを用いたAWSリソースの設定（IAMのUser・Group・Role・Policyの�
 ## [AWS Organizations](https://aws.amazon.com/jp/organizations/)
 
 AWSアカウントの一元管理、大きな組織におけるIAMの管理を簡易化する  
+開発アカウントと本番環境アカウントをOrganizationsメンバーアカウントとしてマスターアカウントに登録して一括請求させることもできる  
 
 * 複数アカウントの一元管理  
 
