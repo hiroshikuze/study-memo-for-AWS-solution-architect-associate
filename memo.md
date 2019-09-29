@@ -37,7 +37,9 @@ IAMポリシーは認証に不要
 
 ### EC2インスタンスストア
 
-インスタンス用のブロックレベルの一時ストレージを提供
+インスタンス用のブロックレベルの一時ストレージを提供  
+暗号化には対応していない  
+（EBS, Glacier, DynamoDB, Storge Gateway, SQSは暗号化に対応）
 
 ### [Elastic IP](https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
 
@@ -477,3 +479,11 @@ Ruby/Java/.NET/PHPなどに対応している、Pythonは非対応
 ## タグ
 
 部門や環境ごとに費用を確認するのなどに用いる
+
+## Active Directory
+
+* Directory Service Simple AD  
+既存のActive Directoryとは連携できない
+
+* Directory Service AD Connector  
+既存のオンプレミスActive Directoryと連携できる、認証をリダイレクトしてIAMロールで設定されたアクセス権限をADユーザーに与える
