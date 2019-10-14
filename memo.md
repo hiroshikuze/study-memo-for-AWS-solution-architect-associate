@@ -133,10 +133,6 @@ HTTP/S、Eメール、SQS、Mobile Push、SMS、Lambdaに対応
 |Data Firehose|S3・Redshiftなどへ配信|
 |Video Streams|カメラ・ビデオを取り込んで解析可能にする|
 
-## [CloudFormation](https://aws.amazon.com/jp/cloudformation/)
-
-プロビジョニング（リソースの準備）されるAWSリソースの集合＝スタック  
-
 ## [CloudWatch](https://aws.amazon.com/jp/cloudwatch/)
 
 EC2で稼動しているLinuxのログも取得できる  
@@ -243,8 +239,10 @@ FIFOキューにおいてメッセージは1回配信されることが保証さ
 
 ## [AWS CloudFormation](https://aws.amazon.com/jp/cloudformation/)
 
-共通言語を用いてリソースを公開可能にする準備をする  
+共通言語（JSONまたはYAML）を用いてリソースを公開可能準備をする  
+プロビジョニング（リソースの準備）されるAWSリソースの集合＝スタック  
 Properties Resourceが必須項目  
+テスト環境と本番環境を自動で同一構成化させたいときに用いる  
 
 |項目|内容|
 |:---|:---|
@@ -252,10 +250,15 @@ Properties Resourceが必須項目
 |Egress|サブネットからの送受信どちらに適用するか指定|
 |RuleAction|ルール一致するトラフィックについて許可・拒否するか指定|
 
+## [AWS CloudFormationデザイナー](https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/working-with-templates-cfn-designer.html)
+
+テンプレートを作成する際にAWSの各種リソース用テンプレートスぺニットなど補助的な機能を使う、グラフィックツール
+
 ## [AWS Elastic Beanstalk](https://aws.amazon.com/jp/elasticbeanstalk/)
 
 コードをアップロードしたらAWSが環境構築（プロビジョニング）・運用開始（デプロイ）まで面倒を見てくれる  
-Nginx上に構築されたWebアプリケーションもデプロイできる
+Nginx上に構築されたWebアプリケーションもデプロイできる  
+自社におけるWebアプリインフラ管理の負荷を下げ、アプリのコード開発に注力したいときに用いる  
 
 ## [AWS OpsWorks](https://aws.amazon.com/jp/opsworks/)
 
