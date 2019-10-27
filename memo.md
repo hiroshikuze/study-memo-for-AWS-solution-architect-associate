@@ -137,8 +137,17 @@ HTTP/S、Eメール、SQS、Mobile Push、SMS、Lambdaに対応
 ## [CloudWatch](https://aws.amazon.com/jp/cloudwatch/)
 
 EC2で稼動しているLinuxのログも取得できる  
-CPU使用率・インスタンスストアボリュームより読み取られたバイト数・ネットワークインターフェイスから受信されたバイト数などは標準メトリックスで収集可能  
-メモリ使用率・ディスク使用率はカスタムメトリクスの使用が必要  
+
+標準メトリックスで収集可能なのは以下などの項目  
+
+* CPU使用率
+* インスタンスストアボリュームより読み取られたバイト数
+* ネットワークインターフェイスから受信されたバイト数
+
+カスタムメトリクスが必要なのは以下のような項目  
+
+* メモリ使用率
+* ディスク使用率はカスタムメトリクスの使用が必要  
 
 EC2の障害を管理担当者に通知するには、EC2にCloudWatchエージェントをインストールすることでカスタムログをCloudWatch Logsに配信する  
 そしてCloudWatch Logsのメトリックスフィルターで監視する文字列を設定し、SNSからアラートを送信する  
@@ -179,15 +188,15 @@ AWS内の独立した仮想ネットワークを構築する
 |種類|内容|
 |:---|:---|
 |[VPCフローログ](https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/flow-logs.html)|VPC内のネットワークインターフェィス間の通信トラフィックも監視可能|
-|[VPCエンドポイント](https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/vpc-endpoints.html)|VPCリソースとAWSサービス間を接続する、EC2からS3やDynamoDBに接続できる|
+|[VPCエンドポイント](https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/vpc-endpoints.html)|インターネットを経由せずVPCリソースとAWSサービス間をプライベート接続する、EC2からS3やDynamoDBに接続できる|
 |[VPCピアリング](https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/vpc-peering.html)|「別のAWSアカウントと」インターネットを経由せずVPC間を接続|
 
 ## [Amazon EBS](https://aws.amazon.com/jp/ebs/)
 
 Amazon Elastic Block Store  
-EC2に接続できるブロックレベルストレージ  
+EC2へ接続できるブロックレベルストレージ  
 単一のEC2インスタンスにしかアタッチできない  
-スナップショットを別のリージョンへコピー可能  
+**スナップショットを別のリージョンへコピー可能**（別リージョンでも動作できるよう途中S3へコピーする必要はない）  
 ストレージの自動拡大・縮小はサポートしていない  
 
 |種類|内容|
@@ -309,6 +318,7 @@ Auto Scalingグループで作成された新しいAmazon Linuxインスタン�
 
 インターネットからアクセスできるのはWebサーバーだけだが、奥のDBサーバーも更新のために内部からの接続は許可したい場合に設置  
 アクセス制御を行うためのものではない  
+単一サービスで起動しているので、単一障害点にならないよう構築する必要がある  
 
 ### ゲートウェイの種類
 
