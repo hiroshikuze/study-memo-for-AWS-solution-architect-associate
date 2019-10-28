@@ -17,7 +17,7 @@ It's a study note in Japanese of AWS solution architect associate.
 
 ## Usage
 
-Read [memo.md](memo.md).
+Read [index.md](index.md).
 
 ## Donation
 
