@@ -297,7 +297,7 @@ Amazon Auroraと比較してフェイルオーバー時に数分間のデータ�
 
 1. エンドポイントを新しいプライマリDBインスタンスに書き換える  
 
-## [AWS Auto Scaling](https://aws.amazon.com/jp/autoscaling/)
+### [AWS Auto Scaling](https://aws.amazon.com/jp/autoscaling/)
 
 EC2インスタンス増加時は、EC2インスタンスが一番少ないAZを指定して起動する  
 
