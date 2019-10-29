@@ -6,8 +6,8 @@
 
 |種類|内容|
 |:---|:---|
-|Data Analytics|リアルタイム分析|
-|Data Streams|Lamdaなどへ提携処理|
+|Data Analytics|リアルタイム分析、ストリーミングデータに対してSQLクエリが実行できる|
+|Data Streams|ストリーミングデータをリアルタイムで保存できる、EMRやLamdaなどへ提携処理|
 |Data Firehose|S3・Redshiftなどへ配信|
 |Video Streams|カメラ・ビデオを取り込んで解析可能にする|
 
@@ -39,4 +39,4 @@ EC2で動かしているサーバー内部ログは取得出来ない
 
 ## [Amazon EMR](https://aws.amazon.com/jp/emr/)
 
-Apache SparkやHadhopを用いて膨大なデータを迅速かつ高効率で分析するサービス
+[Apache Spark](https://www.atmarkit.co.jp/ait/articles/1608/24/news014.html)や[Apache Hadoop](http://hadoop.apache.jp/)を用いて膨大なデータを迅速かつ高効率で分析するサービス

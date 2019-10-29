@@ -11,6 +11,7 @@ CDN
 
 DNS  
 CNAMEレコード（ドメイン名やホスト名の定義）・エイリアスレコードはホストされている場所に関係なく任意のDNSレコードを登録できる  
+AレコードやCNAMEレコードに対しそれぞれTTLを設定できます  
 SLAを100%で定義している  
 AWSサービスは、エンドポイントのIPアドレスが動的変化するためAレコードの設定を行えません  
 代わりにCNAMEレコードまたはエイリアスレコードでエンドポイントを設定する  
@@ -34,9 +35,9 @@ AWS内の独立した仮想ネットワークを構築する
 
 |種類|内容|
 |:---|:---|
-|[VPCフローログ](https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/flow-logs.html)|VPC内のネットワークインターフェィス間の通信トラフィックも監視可能|
+|[VPCフローログ](https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/flow-logs.html)|VPC内のネットワークインターフェィス間の通信トラフィック＝EC2インスタンスへのすべてのネットワークアクセスログも監視可能|
 |[VPCエンドポイント](https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/vpc-endpoints.html)|インターネットを経由せずVPCリソースとAWSサービス間をプライベート接続する、EC2からS3やDynamoDBに接続できる|
-|[VPCピアリング](https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/vpc-peering.html)|「別のAWSアカウントと」インターネットを経由せずVPC間を接続|
+|[VPCピアリング](https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/vpc-peering.html)|「別のAWSアカウントと」インターネットを経由せずVPC間をプライベート接続|
 
 ## NATゲートウェイ・[インターネットゲートウェイ](https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/VPC_Internet_Gateway.html)
 
@@ -53,9 +54,12 @@ AWS内の独立した仮想ネットワークを構築する
 |テープゲートウェイ|仮想テープライブラリ対応バックアップソフトウェアを利用し、Storage gateway経由でS3に保存|
 |ファイルゲートウェイ|S3をオンプレミスのNAS共有ファイルシステムのバックエンドストレージとして使う|
 
+オンプレミス環境でインターフェイスにiSCSIを利用したアプリケーションが稼働していて、これをStorage Gatewayを利用してS3上でデータ管理するよう移行に用いるストレージタイプは、キャッシュ型ボリュームゲートウェイ  
+
 ## リバースプロキシ
 
-一般的な用語、[外部からWebサーバーへアクセスされる際、Webサーバーの代替を行って負荷を下げるサービス](https://www.atmarkit.co.jp/ait/articles/1608/25/news034.html)
+一般的な用語、[外部からWebサーバーへアクセスされる際、Webサーバーの代替を行って負荷を下げるサービス](https://www.atmarkit.co.jp/ait/articles/1608/25/news034.html)  
+Auto Scaling対応  
 
 ## [Elastic Load Balancing](https://aws.amazon.com/jp/elasticloadbalancing/)
 

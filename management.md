@@ -11,34 +11,6 @@ IAMポリシーは認証に不要
 一括請求  
 メンバーアカウント（Linked Account）とマスターアカウント（Payer Account）を統合可能
 
-## [AWS CloudFormation](https://aws.amazon.com/jp/cloudformation/)
-
-共通言語（JSONまたはYAML）を用いてリソースを公開可能準備をする  
-プロビジョニング（リソースの準備）されるAWSリソースの集合＝スタック  
-Properties Resourceが必須項目  
-テスト環境と本番環境を自動で同一構成化させたいときに用いる  
-
-|項目|内容|
-|:---|:---|
-|CidrBlock|許可・拒否するネットワークアドレスを表記|
-|Egress|サブネットからの送受信どちらに適用するか指定|
-|RuleAction|ルール一致するトラフィックについて許可・拒否するか指定|
-
-### [AWS CloudFormationデザイナー](https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/working-with-templates-cfn-designer.html)
-
-テンプレートを作成する際にAWSの各種リソース用テンプレートスぺニットなど補助的な機能を使う  
-JSON形式やYAML形式で記載  
-
-## [AWS Elastic Beanstalk](https://aws.amazon.com/jp/elasticbeanstalk/)
-
-コードをアップロードしたらAWSが環境構築（プロビジョニング）・運用開始（デプロイ）まで面倒を見てくれる  
-Nginx上に構築されたWebアプリケーションもデプロイできる  
-自社におけるWebアプリインフラ管理の負荷を下げ、アプリのコード開発へ注力したいときに用いる  
-
-## [AWS OpsWorks](https://aws.amazon.com/jp/opsworks/)
-
-ChefやPuppet（構築手順）どおりにサーバー構築を自動化してくれる  
-
 ## [IAM](https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/introduction.html)
 
 グローバルサービスなのでリージョンごとに作成する必要はない  
