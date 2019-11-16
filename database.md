@@ -14,6 +14,10 @@ Amazon Auroraと比較してフェイルオーバー時に数分間のデータ�
 
 1. エンドポイントを新しいプライマリDBインスタンスに書き換える  
 
+### RDS for MySQLにおける接続安定化コマンドオプション
+
+ssl-caオプションに公開鍵のフルパスを指定してmysqlクライアントを起動  
+
 ## [AWS Data Pipeline](https://docs.aws.amazon.com/ja_jp/datapipeline/latest/DeveloperGuide/what-is-datapipeline.html)
 
 データベースからのデータを取り出し・加工・保存するサービス
@@ -41,3 +45,8 @@ S3上に置いたファイルを外部テーブルとして使用する
 スキーマ（表と属性）のないデータベース  
 複数のスキーマをそのままの状態で保存しつつ、保存後にスキーマを修正できる  
 センサーから贈られる小さなデータを大量の受信リクエストによって高速蓄積するのに向いている  
+
+## [Dynamo DB Accelerator](https://aws.amazon.com/jp/dynamodb/dax/)
+
+Dyanamo DBのインメモリキャッシュサービス  
+1秒あたり100満開単位のリクエスト処理でも、数ミリ秒のレイテンシーを実現  
