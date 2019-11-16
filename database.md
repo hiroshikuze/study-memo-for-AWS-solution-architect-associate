@@ -5,7 +5,7 @@
 RDB  
 データ量に合わせで自動拡張する  
 
-## RDS for MySQL
+## [RDS for MySQL](https://aws.amazon.com/jp/rds/mysql/)
 
 Amazon Auroraと比較してフェイルオーバー時に数分間のデータを損失する可能性がある  
 シングルインスタンス構成で運用しているDBで障害が発生しバックアップからリストアする手段は以下の通り  
