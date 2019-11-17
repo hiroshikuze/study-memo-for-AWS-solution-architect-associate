@@ -77,16 +77,17 @@ EC2マネジメントコンソールからEC2インスタンスのアクショ�
 
 単一AZ内のEC2インスタンスを論理的にグルーピングしたもの  
 
-### [AWS Auto Scaling](https://aws.amazon.com/jp/autoscaling/)
+## [AWS Auto Scaling](https://aws.amazon.com/jp/autoscaling/)
 
 EC2インスタンス増加時は、EC2インスタンスが一番少ないAZを指定して起動する  
+Auto Scalingでコスト効率がよく可用性高い設定にするには、Desired Capacityをインスタンスで最適なパフォーマンスを発揮する数で指定し、1つのアベイラビリティゾーンがダウンしても最小限必要なインスタンス数を維持するよう設定する  
 
-#### ユーザーデータ（EC2）
+### ユーザーデータ（EC2）
 
 EC2起動時に一度だけスクリプトを実行できる  
 Auto Scalingグループで作成された新しいAmazon Linuxインスタンスにカスタムスクリプトを渡すこともできる  
 
-#### Auto Scalingグループ
+### Auto Scalingグループ
 
 起動されたインスタンスは複数のアベイラビリティーゾーン間で均等にバランシングされる  
 

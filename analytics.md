@@ -35,7 +35,7 @@ CloudWatch AlarmはClowdWatchの通知機能で、ログをフィルターする
 
 AWS API・すべてのアクティビティのログを記録する  
 EC2で動かしているサーバー内部ログは取得出来ない  
-セキュリティグループが変更されたときに個別にEメールによる通知が必要な場合、CloudWatch LogsとSNSを組み合わせる  
+セキュリティグループが変更されたときに個別にEメールによる通知が必要な場合、CloudTrailにCloudWatch LogsとSNSを組み合わせる（※AWS Configではユーザーのアクティビティログは取得できない）  
 
 ## [Amazon EMR](https://aws.amazon.com/jp/emr/)
 
