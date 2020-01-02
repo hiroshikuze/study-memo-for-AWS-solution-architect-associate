@@ -26,8 +26,10 @@ EC2で稼動しているLinuxのログも取得できる
 * メモリ使用率
 * ディスク使用率はカスタムメトリクスの使用が必要  
 
-EC2の障害を管理担当者に通知するには、EC2にCloudWatchエージェントをインストールすることでカスタムログをCloudWatch Logsに配信する  
+EC2の障害を管理担当者に通知するには、**EC2にCloudWatchエージェントをインストールすることでカスタムログをCloudWatch Logsに配信する**  
 そしてCloudWatch Logsのメトリックスフィルターで監視する文字列を設定し、SNSからアラートを送信する  
+
+MFAについてIAMユーザーで有効化されていないものがいないか、アクセスキーのローテートを満たしていないユーザーを検出するには、IAMのユーザー一覧で確認するか、もしくはCloudTrailでユーザーのアクティビティログを確認する  
 
 CloudWatch AlarmはClowdWatchの通知機能で、ログをフィルターすることはできない  
 
@@ -35,7 +37,8 @@ CloudWatch AlarmはClowdWatchの通知機能で、ログをフィルターする
 
 AWS API・すべてのアクティビティのログを記録する  
 EC2で動かしているサーバー内部ログは取得出来ない  
-セキュリティグループが変更されたときに個別にEメールによる通知が必要な場合、CloudTrailにCloudWatch LogsとSNSを組み合わせる（※AWS Configではユーザーのアクティビティログは取得できない）  
+セキュリティグループが変更されたときに個別にEメールによる通知が必要な場合、CloudTrailにCloudWatch LogsとSNSを組み合わせる  
+（※AWS Configではユーザーのアクティビティログは取得できない）
 
 ## [Amazon EMR](https://aws.amazon.com/jp/emr/)
 
