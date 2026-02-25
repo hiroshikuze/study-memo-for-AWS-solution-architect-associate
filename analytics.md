@@ -2,14 +2,14 @@
 
 ## [Amazon Kinesis](https://aws.amazon.com/jp/kinesis/)
 
-ストリミング処理  
+ストリーミング処理
 
 |種類|内容|
 |:---|:---|
-|Data Analytics|リアルタイム分析、ストリーミングデータに対してSQLクエリが実行できる|
-|Data Streams|ストリーミングデータをリアルタイムで保存できる、EMRやLamdaなどへ提携処理|
-|Data Firehose|S3・Redshiftなどへ配信|
-|Video Streams|カメラ・ビデオを取り込んで解析可能にする|
+|[Amazon Managed Service for Apache Flink](https://aws.amazon.com/jp/managed-service-apache-flink/)（旧：Kinesis Data Analytics）|リアルタイム分析、ストリーミングデータに対してSQLクエリが実行できる|
+|[Kinesis Data Streams](https://aws.amazon.com/jp/kinesis/data-streams/)|ストリーミングデータをリアルタイムで保存できる、EMRやLambdaなどへ連携処理|
+|[Amazon Data Firehose](https://aws.amazon.com/jp/firehose/)（旧：Kinesis Data Firehose）|S3・Redshiftなどへ配信|
+|[Kinesis Video Streams](https://aws.amazon.com/jp/kinesis/video-streams/)|カメラ・ビデオを取り込んで解析可能にする|
 
 ## [CloudWatch](https://aws.amazon.com/jp/cloudwatch/)
 
