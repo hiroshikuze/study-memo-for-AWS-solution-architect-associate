@@ -28,9 +28,11 @@ Nginx上に構築されたWebアプリケーションもデプロイできる
 
 ChefやPuppet（構築手順）どおりにサーバー構築を自動化してくれる  
 
-## [AWS CodeCommit](https://aws.amazon.com/jp/codecommit/)
+## AWS CodeCommit
 
 プライベートGitレポジトリでのコード保存
+**2024年7月25日をもって新規顧客の受け付けを終了**（既存ユーザーは継続利用可能）
+代替としてGitHubやGitLabなどの利用が推奨される
 
 ## [AWS CodeBuild](https://aws.amazon.com/jp/codebuild/)
 
